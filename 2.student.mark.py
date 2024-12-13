@@ -151,10 +151,10 @@ def main():
         elif choice == "6":
             manager.DisplayMarks()
         elif choice == "7":
-            print("Exiting program.")
+            print("Program Exited")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice")
 
 
 if __name__ == "__main__":
