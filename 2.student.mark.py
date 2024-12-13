@@ -31,7 +31,7 @@ class CourseMark:
 
     def MarkInformation(self, CourseID, Students):
         if CourseID not in self.StudentMarks:
-            print("No marks recorded for this course.")
+            print("Empty Mark in Course")
             return
 
         for Student in Students:
@@ -54,7 +54,7 @@ class Manager:
                 StudentDoB = input("Enter DoB (DD/MM/YY): ")
                 self.Students.append(Students(StudentName, StudentID, StudentDoB))
         except ValueError:
-            print("Invalid input. Please enter a valid number.")
+            print("Invalid")
 
     def InputCourseInformation(self):
         try:
@@ -64,21 +64,21 @@ class Manager:
                 CourseID = input("Enter course ID: ")
                 self.Courses.append(Courses(CourseName, CourseID))
         except ValueError:
-            print("Invalid input. Please enter a valid number.")
+            print("Invalid")
 
     def InputMarkInformation(self):
         if not self.Courses:
-            print("No courses available. Please add courses first.")
+            print("Invalid course")
             return
 
-        print("\nAvailable Courses:")
+        print("\nCourses:")
         for index, course in enumerate(self.Courses, 1):
             print(f"{index}. {course.CourseName} (ID: {course.CourseID})")
 
         try:
             CourseIndex = int(input("Select a course by number: ")) - 1
             if CourseIndex < 0 or CourseIndex >= len(self.Courses):
-                print("Invalid course selection.")
+                print("Invalid course")
                 return
 
             SelectedCourseID = self.Courses[CourseIndex].CourseID
@@ -87,13 +87,13 @@ class Manager:
                     Mark = float(input(f"Enter mark for {student.StudentName} (ID: {student.StudentID}): "))
                     self.CourseMark.AddMark(SelectedCourseID, student.StudentID, Mark)
                 except ValueError:
-                    print("Invalid mark. Please enter a numeric value.")
+                    print("Invalid mark")
         except ValueError:
-            print("Invalid input. Please select a course by its number.")
+            print("Invalid")
 
     def DisplayStudents(self):
         if not self.Students:
-            print("No students available.")
+            print("Invalid Student")
         else:
             print("\nList of Students:")
             for student in self.Students:
@@ -101,7 +101,7 @@ class Manager:
 
     def DisplayCourses(self):
         if not self.Courses:
-            print("No courses available.")
+            print("Invalid Student")
         else:
             print("\nList of Courses:")
             for course in self.Courses:
@@ -109,20 +109,20 @@ class Manager:
 
     def DisplayMarks(self):
         if not self.Courses:
-            print("No courses available.")
+            print("Invalid Course")
             return
 
-        print("\nAvailable Courses:")
+        print("\nCourses:")
         for index, course in enumerate(self.Courses, 1):
             print(f"{index}. {course.CourseName} (ID: {course.CourseID})")
 
-        CourseID = input("Enter Course ID to view marks: ")
+        CourseID = input("Enter Course ID for marks: ")
         course_found = any(course.CourseID == CourseID for course in self.Courses)
 
         if not course_found:
-            print("Invalid Course ID. Please try again.")
+            print("Invalid Course ID")
         else:
-            print("\nMarks for selected course:")
+            print("\nMarks for select course:")
             self.CourseMark.MarkInformation(CourseID, self.Students)
 
 
